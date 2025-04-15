@@ -3,29 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Web Page</title>
+    <title>Mahesh Ramesh</title> {/* <--- CHANGE THIS */}
     <style>
+        /* Basic Reset & Body Styling */
         body {
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             line-height: 1.6;
-            margin: 40px;
-            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light grey background */
+            color: #333; /* Dark grey text */
         }
-        h1 {
-            color: #333;
+
+        /* Container to center content */
+        .container {
+            max-width: 900px; /* Max width of content */
+            margin: 40px auto; /* Center the container horizontally, add space top/bottom */
+            padding: 30px; /* Padding inside the container */
+            background-color: #ffffff; /* White background for content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            border-radius: 8px; /* Slightly rounded corners */
         }
-        p {
-            color: #555;
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e9ecef; /* Light border */
         }
+
+        header h1 {
+            margin-bottom: 5px;
+            color: #0056b3; /* A nice blue color */
+        }
+
+        header p {
+            color: #6c757d; /* Medium grey for tagline */
+            font-size: 1.1em;
+            font-style: italic;
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 40px; /* Space between sections */
+        }
+
+        h2 {
+            color: #0056b3; /* Blue for section headers */
+            border-bottom: 2px solid #dee2e6; /* Underline for section headers */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Links Styling */
+        a {
+            color: #007bff; /* Standard link blue */
+            text-decoration: none; /* No underline by default */
+        }
+
+        a:hover {
+            text-decoration: underline; /* Underline on hover */
+            color: #0056b3; /* Darker blue on hover */
+        }
+
+        /* Contact/Links List */
+        .contact-links ul {
+            list-style: none; /* Remove bullet points */
+            padding: 0;
+        }
+
+        .contact-links li {
+            margin-bottom: 10px; /* Space between links */
+        }
+
+        .contact-links strong { /* Style the platform name */
+            display: inline-block;
+            min-width: 80px; /* Align the links slightly */
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef; /* Light border */
+            font-size: 0.9em;
+            color: #6c757d; /* Medium grey */
+        }
+
     </style>
 </head>
 <body>
-    <h1>Welcome to My Personal Page!</h1>
-    <p>
-        This is my first website hosted on GitHub Pages. Isn't that cool?
-    </p>
-    <p>
-        I can add more content here later like text, images, links, and more!
-    </p>
+
+    <div class="container">
+
+        <header>
+            <h1>Mahesh Ramesh</h1> {/* <--- CHANGE THIS */}
+            <p>Engineer?</p> {/* <--- CHANGE THIS */}
+        </header>
+
+        <main>
+            <section id="about">
+                <h2>About Me</h2>
+                <p>
+                    I'm a master's student at the University of Wisconsin Madison, before that, I did my undergraduate at IIT Madras. My interest lies in self-supervised learning, and good shit.
+                </p>
+                <p>
+                    Before joining the University of Wisconsin-Madison. I worked one year at JP Morgan Asset and Wealth Management. In general, I like to be free and like super ambitious people.
+                </p>
+            </section>
+
+            <section id="projects-skills">
+                <h2>Projects / Skills</h2>
+                <p>
+                    Here you can talk about projects you've worked on (personal, school, or work).
+                    If you don't have specific projects yet, you can list skills you are learning or possess.
+                </p>
+                <!-- Example: Listing skills -->
+                 <ul>
+                    <li>HTML & CSS</li>
+                    <li>JavaScript (Learning)</li>
+                    <li>Python</li>
+                    <li>Problem Solving</li>
+                    <li>Your Skill Here</li> {/* <--- ADD/CHANGE SKILLS */}
+                 </ul>
+                 <!-- Example: Describing a project -->
+                 <!--
+                 <h3>Project Title</h3>
+                 <p>Description of the project, what technologies were used, and maybe a link if it's hosted somewhere else.</p>
+                 -->
+            </section>
+
+            <section id="contact" class="contact-links">
+                <h2>Contact / Find Me Online</h2>
+                <ul>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/Maheshram1" target="_blank">Maheshram1</a></li> {/* <--- CHANGE THIS */}
+                    <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mahesh-r-21a4981a4/" target="_blank">Mahesh R</a></li> {/* <--- CHANGE THIS */}
+                    <li><strong>Email:</strong> <a href="mailto:mramesh4@wisc.edu">mramesh4@wisc.edu</a></li> {/* <--- CHANGE THIS */}
+                    <!-- Add other links like Twitter, Portfolio, etc. if you have them -->
+                    <!-- <li><strong>Twitter:</strong> <a href="https://twitter.com/your_handle" target="_blank">@your_handle</a></li> -->
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 Mahesh Ramesh. Hosted on GitHub Pages.</p> {/* <--- CHANGE YEAR/NAME */}
+        </footer>
+
+    </div> <!-- /container -->
+
 </body>
 </html>
