@@ -104,7 +104,7 @@
                         <li>You concatenate those <code>d_model</code> scalar results from all the heads, and bam, you've reconstructed a <code>d_model</code> vector.</li>
                     </ol>
                     <p>
-                        You end up with <code>d_model</code> parallel attention calculations, but they're all working purely at the scalar level – comparing single numbers, weighting single numbers. Kind of a wild edge case, right? It <em>seems</em> like it might give that dimension-level control I was wondering about, but in a super weird, atomized way. Definitely not how people usually run MHA (where <code>d_k</code> is usually something like 64), but interesting to noodle on. Also, this requires much more compute, which might not be worth it. 
+                        You end up with <code>d_model</code> parallel attention calculations, but they're all working purely at the scalar level comparing single numbers, weighting single numbers. Kind of a wild edge case, right? It <em>seems</em> like it might give that dimension-level control I was wondering about, but in a super weird, atomized way. Definitely not how people usually run MHA (where <code>d_k</code> is usually something like 64), but interesting to noodle on. But, this requires much more compute, which might not be worth it. 
                     </p>
 
                     <h4>Hang On, Do Q, K, and V <em>Need</em> the Same Dimension? (Spoiler: No!)</h4>
