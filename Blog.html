@@ -6,6 +6,35 @@
     <title>Mahesh Ramesh - Blog</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Basic styling for code blocks - add to your style.css */
+        code {
+            background-color: #f4f4f4;
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        article.blog-post {
+            margin-bottom: 2em; /* Add some space between posts if you add more */
+            padding-bottom: 1em;
+            border-bottom: 1px solid #eee; /* Optional separator */
+        }
+        article.blog-post h3 {
+            margin-top: 0;
+        }
+         article.blog-post h4 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        article.blog-post ol, article.blog-post ul {
+            margin-left: 1.5em;
+        }
+         article.blog-post li {
+            margin-bottom: 0.5em;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +61,97 @@
         <main>
             <section id="blog" class="post-list">
                 <h2>Blog</h2>
-                <p>Thoughts and updates coming soon...</p>
+
+                <!-- ==== START OF BLOG POST ==== -->
+                <article class="blog-post">
+                    <h3>MHA: That Scalar Weight Thing and Why V Might Be Underrated</h3>
+                    <!-- Optional: <p class="post-meta">Posted on: October 26, 2023</p> -->
+
+                    <h4>Quick MHA Recap (You Probably Know This)</h4>
+                    <p>
+                        Alright, What's Multi-Head Attention? Look, I'm assuming if you're here, you've got some idea about basic attention and maybe even MHA already. If not, this probably isn't the best starting point (and don't ask me if I know it perfectly, I just think I do).
+                    </p>
+                    <p>
+                        But quick recap anyway: You take your input sequence (with embedding dimension, let's say <code>d_model</code>), transform it using learned linear layers into Query (<code>Q</code>), Key (<code>K</code>), and Value (<code>V</code>) tensors, all typically still <code>d_model</code> deep. Mash the Query and Key together (usually a scaled dot product: <code>softmax(Q @ K^T / sqrt(d_k))</code>) to see how relevant they are – that gives you attention scores (one score per query-key pair). Use those scores to create a weighted average of the Value tensors, and finally, run that result through one last output linear layer. Boom, attention.
+                    </p>
+                    <p>
+                        So, the "Multi-Head" bit? The idea is that maybe one big attention calculation tries to average too many things. MHA lets you do this in parallel. Instead of one big dance, you have, say, <code>h</code> heads doing smaller dances simultaneously. The common efficient trick is: after getting your main <code>Q</code>, <code>K</code>, <code>V</code> (all <code>d_model</code> deep), you use linear projections and then reshape/split their embedding dimension (<code>d_model</code>) into <code>h</code> chunks. Each chunk now has a smaller dimension, <code>d_k = d_model / h</code>. So, head 1 gets the first <code>d_k</code> dimensions of the transformed <code>Q</code>, <code>K</code>, <code>V</code>, head 2 gets the next <code>d_k</code>, and so on. Each head then runs the attention calculation (that scaled dot product thing) separately using only its own little <code>d_k</code>-dimensional chunk of <code>Q</code>, <code>K</code>, and <code>V</code>. Afterwards, you stitch the <code>d_k</code>-dimensional results from all <code>h</code> heads back together (concatenating them) and usually run it through that final output projection layer (<code>W_O</code>). Parallel processing, different perspectives, cool stuff.
+                    </p>
+
+                    <h4>The Scalar Weight Thing... Kinda Basic When You Think About It?</h4>
+                    <p>
+                        Okay, revision over. Here's something I didn't really clock until I started thinking about it more: Standard attention, even with multiple heads, calculates <strong>one single scalar attention weight</strong> (that <code>a_ij</code> thing) for each query <code>i</code> and key <code>j</code> pair. This number pops out after comparing their whole vectors (either the full <code>d_model</code> one or the smaller <code>d_k</code> chunk in a head).
+                    </p>
+                    <p>
+                        And here’s the part that got me thinking: that single number <code>a_ij</code> then <strong>uniformly scales <em>every single element</em></strong> within the corresponding Value vector <code>V_j</code> (or the head's <code>d_k</code> slice of <code>V_j</code>) when you do the weighted sum. It’s basically like the attention mechanism looks at <code>Q_i</code> and <code>K_j</code> and decides, "Okay, <code>V_j</code> is like, 70% important overall," and then just multiplies the <em>whole damn thing</em> by 0.7. Every dimension in that <code>V_j</code> chunk gets the same blunt scaling factor.
+                    </p>
+
+                    <h4>What If Attention Was... Pickier?</h4>
+                    <p>
+                        But what if you wanted attention to be... I don't know, more picky? I was thinking, why <em>not</em> give a different weight to <strong>each dimension</strong> within that Value chunk (<code>V_j</code>), instead of applying the same single scalar weight (<code>a_ij</code>) to all of them? It <em>feels</em> like that should give the model more freedom, right? Like, maybe the relationship between <code>Q_i</code> and <code>K_j</code> tells us that the first few dimensions of <code>V_j</code> are super relevant, but the later ones aren't really needed <em>for this specific query</em>. Standard attention just doesn't let you do that directly; that single scalar weight hits the whole <code>V_j</code> chunk globally.
+                    </p>
+
+                    <h4>Crazy Thought: What if <code>num_heads = d_model</code>?</h4>
+                    <p>
+                        And that led to a thought: What actually happens if you crank the number of heads all the way up to the embedding dimension (<code>num_heads = d_model</code>)? Remember, <code>head_dim = d_model // num_heads</code>. So, yeah, if <code>num_heads = d_model</code>, then <code>head_dim</code> slams down to exactly <strong>1</strong>!
+                    </p>
+                    <p>What does that even mean?</p>
+                    <ol>
+                        <li>Each of the <code>d_model</code> heads is doing its attention dance based on just a <strong>single scalar number</strong> sliced from the projected <code>Q</code>, <code>K</code>, and <code>V</code> tensors.</li>
+                        <li>The attention calculation inside a head <code>h</code> comparing query <code>i</code> and key <code>j</code>? Basically just multiplying two scalars (<code>q_scalar_h_i * k_scalar_h_j</code>). Dead simple.</li>
+                        <li>The "Value vector" for that head? Also just one scalar.</li>
+                        <li>So, each head spits out a single scalar (a weighted sum of scalars).</li>
+                        <li>You concatenate those <code>d_model</code> scalar results from all the heads, and bam, you've reconstructed a <code>d_model</code> vector.</li>
+                    </ol>
+                    <p>
+                        You end up with <code>d_model</code> parallel attention calculations, but they're all working purely at the scalar level – comparing single numbers, weighting single numbers. Kind of a wild edge case, right? It <em>seems</em> like it might give that dimension-level control I was wondering about, but in a super weird, atomized way. Definitely not how people usually run MHA (where <code>d_k</code> is usually something like 64), but interesting to noodle on.
+                    </p>
+
+                    <h4>Hang On, Do Q, K, and V <em>Need</em> the Same Dimension? (Spoiler: No!)</h4>
+                    <p>
+                        Okay, speaking of dimensions and assumptions... We usually learn MHA, and see it implemented, where the projected <code>Q</code>, <code>K</code>, and <code>V</code> <em>within a head</em> all share the same dimension, <code>d_k = d_model / num_heads</code>. And yeah, <strong>Query (<code>Q</code>) and Key (<code>K</code>) <em>have</em> to have the same dimension (<code>d_k</code>)</strong> inside the head – you can't do the scaled dot product (<code>Q @ K^T</code>) otherwise. Makes sense.
+                    </p>
+                    <p>
+                        But here’s the kicker people sometimes miss: <strong>the Value (<code>V</code>) dimension doesn't <em>have</em> to match <code>Q</code> and <code>K</code>!</strong>
+                    </p>
+                    <p>
+                        You could absolutely project <code>V</code> to have a different dimension, let's call it <code>d_v</code>, which might be different from <code>d_k</code>. The process would look like this:
+                    </p>
+                    <ol>
+                        <li>Calculate the scalar attention scores <code>a_ij</code> using <code>Q</code> (dim <code>d_k</code>) and <code>K</code> (dim <code>d_k</code>).</li>
+                        <li>Use those scores <code>a_ij</code> to weight the corresponding <code>V</code> vectors (which now have dim <code>d_v</code>). The output of a single head would then have dimension <code>d_v</code>.</li>
+                        <li>Concatenate the outputs from all <code>h</code> heads, resulting in a vector of dimension <code>h * d_v</code>.</li>
+                        <li>That final output projection layer (<code>W_O</code>) then takes this big <code>h * d_v</code> vector and maps it back down to the desired model dimension (<code>d_model</code>).</li>
+                    </ol>
+                    <p>
+                        So, the dimension used for the <em>comparison</em> (<code>d_k</code> for <code>Q</code> and <code>K</code>) can be separated from the dimension of the <em>information being aggregated</em> (<code>d_v</code> for <code>V</code>). This flexibility is often glossed over!
+                    </p>
+
+                    <h4>Why This Matters: V is Where the Action Is (Maybe)</h4>
+                    <p>
+                        And this separation is cool because, let's face it, while <code>Q</code> and <code>K</code> do the important job of figuring out <em>what</em> to focus on, <strong><code>V</code> is where the actual <em>content</em> is</strong>. It's the stuff that gets averaged together and passed on.
+                    </p>
+                    <p>
+                        It probably won't shock you then, that some interesting research pops up when people start messing directly with the Value stream. If <code>V</code> is carrying the payload, maybe tweaking <code>V</code> itself pays off? Folks have found performance bumps by doing things like:
+                    </p>
+                    <ul>
+                        <li>Adding <strong>value residuals</strong> (like, adding the original projected V back in *after* the weighting, or something similar).</li>
+                        <li>Applying <strong>activation functions</strong> directly to <code>V</code> before or after weighting.</li>
+                    </ul>
+                    <p>
+                        It seems like focusing some innovation on the Value pathway, not just the <code>Q</code>-<code>K</code> interaction, might be a pretty good bet for squeezing more performance out of these models.
+                    </p>
+                    <p>
+                        But digging into all the specific ways you can tweak the Value stream? That’s definitely getting into the weeds and is probably a whole other post.
+                    </p>
+                    <p>
+                        Alright, that's the download for now. Catch you on the next one.
+                    </p>
+
+                </article>
+                <!-- ==== END OF BLOG POST ==== -->
+
+                <!-- Add more <article> blocks here for future posts -->
 
             </section>
         </main>
