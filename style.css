@@ -1,0 +1,156 @@
+/* style.css */
+
+/* Basic Reset & Body Styling */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF5F5; /* Lavender Blush - Light Pink */
+    color: #444; /* Darker grey text for contrast */
+}
+
+/* Container to center content */
+.container {
+    max-width: 900px;
+    margin: 30px auto; /* Reduced top/bottom margin */
+    padding: 30px;
+    background-color: #ffffff; /* White background for content */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    border-radius: 8px;
+}
+
+/* Header Styling */
+header {
+    text-align: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px; /* Reduced margin */
+    /* Removed border for a cleaner look with nav */
+}
+
+header h1 {
+    margin-bottom: 5px;
+    color: #581845; /* Darker Purple/Pink for heading */
+    font-size: 2.2em;
+}
+
+header p.tagline {
+    color: #777; /* Medium grey for tagline */
+    font-size: 1.1em;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* Header Social Links */
+.header-social-links {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0 0; /* Space above icons */
+    text-align: center;
+}
+
+.header-social-links li {
+    display: inline-block;
+    margin: 0 12px;
+}
+
+.header-social-links a {
+    color: #555; /* Icon color */
+    font-size: 1.8em; /* Slightly smaller icons */
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.header-social-links a:hover {
+    color: #DA70D6; /* Orchid - Pink hover color */
+}
+
+/* Navigation Styling (NEW) */
+nav {
+    text-align: center;
+    margin-bottom: 30px; /* Space below nav */
+    padding-bottom: 15px; /* Space inside nav area */
+    border-bottom: 1px solid #eee; /* Light separator */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin: 0 18px; /* Space between nav links */
+}
+
+nav a {
+    text-decoration: none;
+    color: #C71585; /* Medium Violet Red for nav links */
+    font-weight: 500; /* Slightly bolder */
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active { /* Style for hover and active page */
+    color: #900C3F; /* Darker Magenta/Pink */
+    border-bottom: 2px solid #900C3F; /* Underline effect for active/hover */
+    padding-bottom: 3px;
+}
+
+
+/* Section Styling */
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #581845; /* Darker Purple/Pink for section headers */
+    border-bottom: 2px solid #f0e6f2; /* Lighter pink/purple underline */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* General Links Styling (within main content) */
+main a {
+    color: #C71585; /* Medium Violet Red */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+main a:hover {
+    text-decoration: underline;
+    color: #900C3F; /* Darker Magenta/Pink */
+}
+
+/* Blog/Papers List Styling (Example) */
+.post-list ul, .paper-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+.post-list li, .paper-list li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #ddd; /* Dotted separator */
+}
+.post-list li:last-child, .paper-list li:last-child {
+    border-bottom: none; /* Remove border from last item */
+}
+.post-list .date, .paper-list .venue { /* Style for date or venue */
+    display: block;
+    font-size: 0.9em;
+    color: #888;
+    margin-top: 3px;
+}
+
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #888; /* Lighter grey */
+}
