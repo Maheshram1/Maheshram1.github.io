@@ -28,7 +28,19 @@
                 <article class="blog-post">
                     <h3>MHA: That Scalar Weight Thing and Why V Might Be Underrated</h3>
 
-                    <h4>Quick MHA Recap</h4>
+                    <div class="blog-toc">
+                        <div class="toc-title">Contents</div>
+                        <ol>
+                            <li><a href="#mha-recap">Quick MHA Recap</a></li>
+                            <li><a href="#scalar-weight">The Scalar Weight Problem</a></li>
+                            <li><a href="#pickier-attention">What If Attention Was Pickier?</a></li>
+                            <li><a href="#extreme-case">Extreme Case: num_heads = d_model</a></li>
+                            <li><a href="#qkv-dimensions">Q, K, and V Don't Need the Same Dimension</a></li>
+                            <li><a href="#value-stream">V Is Where the Action Is</a></li>
+                        </ol>
+                    </div>
+
+                    <h4 id="mha-recap">Quick MHA Recap</h4>
                     <p>
                         Assuming you already have some idea about basic attention and MHA. Quick recap: you take your input sequence (with embedding dimension <code>d_model</code>), transform it using learned linear layers into Query (<code>Q</code>), Key (<code>K</code>), and Value (<code>V</code>) tensors. Mash Q and K together via a scaled dot product: <code>softmax(Q @ K^T / sqrt(d_k))</code> to get attention scores. Use those scores to create a weighted average of V, then run through an output linear layer.
                     </p>
@@ -36,17 +48,17 @@
                         The "Multi-Head" part: instead of one big calculation, you have <code>h</code> heads doing smaller calculations in parallel. After getting your main Q, K, V (all <code>d_model</code> deep), you reshape/split their embedding dimension into <code>h</code> chunks, each with dimension <code>d_k = d_model / h</code>. Each head runs attention separately on its chunk, then you concatenate and project back through <code>W_O</code>.
                     </p>
 
-                    <h4>The Scalar Weight Problem</h4>
+                    <h4 id="scalar-weight">The Scalar Weight Problem</h4>
                     <p>
                         Standard attention calculates <strong>one single scalar attention weight</strong> <code>a_ij</code> for each query-key pair. That single number then <strong>uniformly scales every element</strong> of the corresponding Value vector. The mechanism looks at Q_i and K_j, decides "V_j is 70% important overall," and multiplies the <em>whole thing</em> by 0.7. Every dimension gets the same blunt scaling factor.
                     </p>
 
-                    <h4>What If Attention Was Pickier?</h4>
+                    <h4 id="pickier-attention">What If Attention Was Pickier?</h4>
                     <p>
                         Why not give a different weight to <strong>each dimension</strong> within the Value chunk, instead of applying a single scalar? It feels like that should give the model more freedom. Maybe the relationship between Q_i and K_j tells us that certain dimensions of V_j are highly relevant while others aren't needed for this specific query.
                     </p>
 
-                    <h4>Extreme Case: <code>num_heads = d_model</code></h4>
+                    <h4 id="extreme-case">Extreme Case: <code>num_heads = d_model</code></h4>
                     <p>
                         What happens if you crank heads all the way up? Since <code>head_dim = d_model / num_heads</code>, setting <code>num_heads = d_model</code> gives <code>head_dim = 1</code>.
                     </p>
@@ -60,7 +72,7 @@
                         You get <code>d_model</code> parallel scalar-level attention calculations. It seems to give dimension-level control, but in an atomized way. Definitely not standard (where <code>d_k</code> is usually ~64), and the compute cost may not be worth it.
                     </p>
 
-                    <h4>Q, K, and V Don't Need the Same Dimension</h4>
+                    <h4 id="qkv-dimensions">Q, K, and V Don't Need the Same Dimension</h4>
                     <p>
                         Q and K <em>must</em> match in dimension (you can't compute <code>Q @ K^T</code> otherwise). But <strong>V can have a different dimension <code>d_v</code></strong>. The process:
                     </p>
@@ -74,7 +86,7 @@
                         The comparison dimension (<code>d_k</code>) is separate from the information dimension (<code>d_v</code>). This flexibility is often glossed over.
                     </p>
 
-                    <h4>V Is Where the Action Is</h4>
+                    <h4 id="value-stream">V Is Where the Action Is</h4>
                     <p>
                         While Q and K figure out <em>what</em> to focus on, <strong>V carries the actual content</strong> that gets aggregated and passed forward. Research has found performance improvements from manipulating the Value stream directly: adding value residuals from previous layers, applying activation functions to V before weighting, etc. The Value pathway seems like a high-leverage target for architectural improvements. But that's a whole other post.
                     </p>
