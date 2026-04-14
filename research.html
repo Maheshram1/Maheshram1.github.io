@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahesh Ramesh - Research</title>
+    <meta name="description" content="Publications by Mahesh Ramesh — cooperative reasoning, vision transformers, cultural bias in generative models.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -11,67 +12,62 @@
 
     <div class="container">
 
-        <header>
-            <h1>Mahesh Ramesh</h1>
-            <p class="tagline">Engineer?</p>
-             <ul class="header-social-links">
-                <li><a href="https://github.com/Maheshram1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/mahesh-r-21a4981a4/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="mailto:mramesh4@wisc.edu" title="Email"><i class="fas fa-envelope"></i></a></li>
-            </ul>
-        </header>
-
         <nav>
+            <a href="index.html" class="site-name">Mahesh Ramesh</a>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="Blog.html">Blogs</a></li>
                 <li><a href="research.html" class="active">Research</a></li>
+                <li><a href="Blog.html">Blog</a></li>
             </ul>
         </nav>
 
         <main>
-            <section id="research" class="paper-list">
-                <h2>Papers & Publications</h2>
+            <section id="research">
+                <h2>Publications</h2>
 
-                <ul>
+                <ul class="pub-list">
                     <li>
-                        <h3>MABViT -- Modified Attention Block Enhances Vision Transformers</h3>
-                        <p><strong>Authors:</strong> Mahesh Ramesh, Aswinkumar Ramkumar</p>
-                        <span class="venue">Deployable AI Workshop, AAAI Conference 2024 (Oral)</span>
-                        <p>
-                           [ <a href="https://arxiv.org/abs/2312.01324" target="_blank">arXiv:2312.01324</a> ]
-                           <!-- Add links to official PDF, Code, etc. here if available -->
-                        </p>
-                        <!-- Optional: Add a short description or abstract snippet if desired -->
-                        <!-- <p>Abstract snippet or brief description...</p> -->
+                        <div class="pub-title">Sparks of Cooperative Reasoning: LLMs as Strategic Hanabi Agents</div>
+                        <div class="pub-authors"><strong>Mahesh Ramesh</strong>, Kaousheik Jayakumar, Aswinkumar Ramkumar, Pavan Thodima, Aniket Rege, Emmanouil-Vasileios Vlatakis-Gkaragkounis</div>
+                        <div class="pub-venue">ICML 2026 (In Submission, Scores: 5/6, 5/6, 5/6) &middot; NeurIPS 2025 LAW Workshop</div>
+                        <div class="pub-desc">Introduced a multi-turn benchmark to evaluate state-tracking in frontier models. RL-trained a 4B model on curated data, outperforming all non-reasoning baselines. Released 1500+ game trajectories for SFT and move-level ratings for RLVR.</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2601.18077" target="_blank">[arXiv]</a></div>
                     </li>
-                     <!-- Add more papers here using the same <li> structure -->
-                </ul>
 
-                <ul>
                     <li>
-                        <h3>CuRe: Cultural Gaps in the Long Tail of Text-to-Image Systems</h3>
-                        <p><strong>Authors:</strong> Aniket Rege, Zinnia Nie, Mahesh Ramesh, Unmesh Raskar, Zhuoran Yu, Aditya Kusupati, Yong Jae Lee, Ramya Korlakai Vinayak</p>
-                        <span class="venue">ICCV 2025 and DemoDiv Workshop CVPR 2025 (Oral)</span>
-                        <p>
-                           [ <a href="https://arxiv.org/abs/2506.08071" target="_blank">arXiv:2506.08071</a> ]
-                           <!-- Add links to official PDF, Code, etc. here if available -->
-                        </p>
-                        <!-- Optional: Add a short description or abstract snippet if desired -->
-                        <!-- <p>Abstract snippet or brief description...</p> -->
+                        <div class="pub-title">CuRe: Cultural Gaps in the Long Tail of Text-to-Image Models</div>
+                        <div class="pub-authors">Aniket Rege, Zinnia Nie, <strong>Mahesh Ramesh</strong>, Unmesh Raskar, Zhuoran Yu, Aditya Kusupati, Yong Jae Lee, Ramya Korlakai Vinayak</div>
+                        <div class="pub-venue">ICCV 2025 &middot; CVPR DemoDiv Workshop (Oral)</div>
+                        <div class="pub-desc">Curated 300 artifacts across 6 cultural axes and 64 countries. Developed Marginal Information Attribution metrics achieving 2x Spearman correlation improvement over prior scorers. Conducted 2,700 artifact-level surveys with culturally-aligned annotators.</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2506.08071" target="_blank">[arXiv]</a></div>
                     </li>
-                     <!-- Add more papers here using the same <li> structure -->
+
+                    <li>
+                        <div class="pub-title">MABViT: Modified Attention Block Enhances Vision Transformers</div>
+                        <div class="pub-authors"><strong>Mahesh Ramesh</strong>, Aswinkumar Ramkumar</div>
+                        <div class="pub-venue">Deployable AI Workshop, AAAI 2024 (Oral)</div>
+                        <div class="pub-desc">Integrated Gated Linear Units into the attention module for parallel MLP-attention computation. Achieved 0.6% accuracy gain over ViT-S/16, surpassed ViT-B/16 with half the parameters, and 17% faster training convergence.</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2312.01324" target="_blank">[arXiv]</a></div>
+                    </li>
                 </ul>
+            </section>
 
-                <hr style="border: 0; border-top: 1px dashed #ccc; margin: 30px 0;">
+            <section id="thesis">
+                <h2>Thesis</h2>
 
-<!--                 <p><em>Coming soon: A benchmark of Text-to-Image models.</em></p> -->
-
+                <ul class="pub-list">
+                    <li>
+                        <div class="pub-title">Multivariate Time-Series Data Augmentation for Anomaly Detection</div>
+                        <div class="pub-authors"><strong>Mahesh Ramesh</strong></div>
+                        <div class="pub-venue">B.Tech Thesis, IIT Madras &middot; Dassault Aviation Collaboration &middot; Presented at RBCDSAI 2023</div>
+                        <div class="pub-desc">Designed a deep neural network to augment scarce flight telemetry for improved anomaly-detection recall. Segmented mixed discrete/continuous sensor streams into state clusters. Implemented a PyTorch VAE with scaled dot-product attention and soft constraints, achieving a 15% reduction in discrimination score.</div>
+                    </li>
+                </ul>
             </section>
         </main>
 
         <footer>
-            <p>© 2024 Mahesh Ramesh. Hosted on GitHub Pages.</p>
+            <p>&copy; 2026 Mahesh Ramesh</p>
         </footer>
 
     </div>

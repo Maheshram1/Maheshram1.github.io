@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahesh Ramesh - Home</title>
+    <title>Mahesh Ramesh</title>
+    <meta name="description" content="Mahesh Ramesh — MS CS at UW-Madison. Research in cooperative multi-agent reasoning, reinforcement learning, and LLM evaluation.">
+    <meta property="og:title" content="Mahesh Ramesh">
+    <meta property="og:description" content="MS CS at UW-Madison. Research in cooperative multi-agent reasoning, RL, and LLM evaluation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://maheshram1.github.io/">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -11,42 +16,167 @@
 
     <div class="container">
 
-        <header>
-            <h1>Mahesh Ramesh</h1>
-            <p class="tagline">Engineer?</p>
-            <ul class="header-social-links">
-                <li><a href="https://github.com/Maheshram1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/mahesh-r-21a4981a4/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="mailto:mramesh4@wisc.edu" title="Email"><i class="fas fa-envelope"></i></a></li>
-            </ul>
-        </header>
-
         <nav>
+            <a href="index.html" class="site-name">Mahesh Ramesh</a>
             <ul>
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="Blog.html">Blogs</a></li>
                 <li><a href="research.html">Research</a></li>
+                <li><a href="Blog.html">Blog</a></li>
             </ul>
         </nav>
 
         <main>
-            <section id="about">
-                <h2>About Me</h2>
-                <p>
-                    Master’s student at UW–Madison. Before this, did my undergrad at IIT Madras, interned at a hedge fund, and then a year in Asset & Wealth Management at a global bank.
-                    <br><br>
-                    Mostly into self-supervised learning and good shit. I like being free, ambitious, and I want to do things in a simple way.
-                    <br><br>
-                    I spend my time playing chess, keeping up with brain rot, and photoshopping my dog into weird scenarios (he has seen things). Hala Madrid y nada más.
-                    <br><br>
-                    This website is basically that mess, just typed out.
-                </p>
+
+            <!-- Profile -->
+            <div class="profile">
+                <div class="profile-photo">
+                    <img src="photo.jpg" alt="Mahesh Ramesh">
+                </div>
+                <div class="profile-info">
+                    <h1>Mahesh Ramesh</h1>
+                    <div class="affiliation">M.S. Computer Science, University of Wisconsin-Madison</div>
+                    <p>
+                        I work on cooperative multi-agent reasoning, reinforcement learning, and evaluation of large language models. Currently benchmarking frontier models in strategic cooperative settings and training smaller models to match their performance.
+                    </p>
+                    <p>
+                        I am interning at <a href="https://www.kalpalabs.ai/" target="_blank">Kalpa Labs</a> (YC F25), working on large-scale text-to-speech training with Megatron-LM. Previously, I was a Quantitative Research Analyst at JP Morgan Chase and interned at WorldQuant. I completed my B.Tech at IIT Madras.
+                    </p>
+                    <ul class="profile-links">
+                        <li><a href="mailto:mramesh4@wisc.edu"><i class="fas fa-envelope"></i> Email</a></li>
+                        <li><a href="https://scholar.google.com/citations?user=SG36cioAAAAJ&hl=en" target="_blank"><i class="fas fa-graduation-cap"></i> Scholar</a></li>
+                        <li><a href="https://github.com/Maheshram1" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                        <li><a href="https://www.linkedin.com/in/mahesh-r-21a4981a4/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- News -->
+            <section id="news">
+                <h2>News</h2>
+                <ul class="news-list">
+                    <li>
+                        <span class="news-date">Apr 2026</span>
+                        <span>Paper on LLMs as cooperative Hanabi agents submitted to ICML 2026 (scores: 5/6, 5/6, 5/6).</span>
+                    </li>
+                    <li>
+                        <span class="news-date">Feb 2026</span>
+                        <span>Started as ML Intern at <a href="https://www.kalpalabs.ai/" target="_blank">Kalpa Labs</a> (YC F25) in San Francisco.</span>
+                    </li>
+                    <li>
+                        <span class="news-date">2025</span>
+                        <span>CuRe accepted at ICCV 2025 and CVPR DemoDiv Workshop (Oral).</span>
+                    </li>
+                    <li>
+                        <span class="news-date">2025</span>
+                        <span>Hanabi paper accepted at NeurIPS 2025 LAW Workshop.</span>
+                    </li>
+                    <li>
+                        <span class="news-date">2024</span>
+                        <span>MABViT accepted at Deployable AI Workshop, AAAI 2024 (Oral).</span>
+                    </li>
+                </ul>
             </section>
+
+            <!-- Selected Publications -->
+            <section id="publications">
+                <h2>Selected Publications</h2>
+                <ul class="pub-list">
+                    <li>
+                        <div class="pub-title">Sparks of Cooperative Reasoning: LLMs as Strategic Hanabi Agents</div>
+                        <div class="pub-authors"><strong>Mahesh Ramesh</strong>, Kaousheik Jayakumar, Aswinkumar Ramkumar, Pavan Thodima, Aniket Rege, Emmanouil-Vasileios Vlatakis-Gkaragkounis</div>
+                        <div class="pub-venue">ICML 2026 (In Submission) &middot; NeurIPS 2025 LAW Workshop</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2601.18077" target="_blank">[arXiv]</a></div>
+                    </li>
+                    <li>
+                        <div class="pub-title">CuRe: Cultural Gaps in the Long Tail of Text-to-Image Models</div>
+                        <div class="pub-authors">Aniket Rege, Zinnia Nie, <strong>Mahesh Ramesh</strong>, Unmesh Raskar, Zhuoran Yu, Aditya Kusupati, Yong Jae Lee, Ramya Korlakai Vinayak</div>
+                        <div class="pub-venue">ICCV 2025 &middot; CVPR DemoDiv Workshop (Oral)</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2506.08071" target="_blank">[arXiv]</a></div>
+                    </li>
+                    <li>
+                        <div class="pub-title">MABViT: Modified Attention Block Enhances Vision Transformers</div>
+                        <div class="pub-authors"><strong>Mahesh Ramesh</strong>, Aswinkumar Ramkumar</div>
+                        <div class="pub-venue">Deployable AI Workshop, AAAI 2024 (Oral)</div>
+                        <div class="pub-links"><a href="https://arxiv.org/abs/2312.01324" target="_blank">[arXiv]</a></div>
+                    </li>
+                </ul>
+                <p style="font-size: 0.88rem;"><a href="research.html">Full list &rarr;</a></p>
+            </section>
+
+            <!-- Education -->
+            <section id="education">
+                <h2>Education</h2>
+                <ul class="edu-list">
+                    <li>
+                        <div class="edu-header">
+                            <span class="edu-school">University of Wisconsin-Madison</span>
+                            <span class="edu-period">Sep 2024 &ndash; May 2026</span>
+                        </div>
+                        <div class="edu-degree">M.S. Computer Science &middot; GPA 3.87/4.00</div>
+                    </li>
+                    <li>
+                        <div class="edu-header">
+                            <span class="edu-school">Indian Institute of Technology Madras</span>
+                            <span class="edu-period">Jul 2019 &ndash; Jul 2023</span>
+                        </div>
+                        <div class="edu-degree">B.Tech Chemical Engineering &middot; CGPA 8.64/10</div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Experience (compact) -->
+            <section id="experience">
+                <h2>Experience</h2>
+                <ul class="exp-list">
+                    <li>
+                        <div class="exp-header">
+                            <span class="exp-org">Kalpa Labs (YC F25)</span>
+                            <span class="exp-period">Feb 2026 &ndash; Present</span>
+                        </div>
+                        <div class="exp-role">Machine Learning Intern, San Francisco</div>
+                        <div class="exp-details">Large-scale TTS training with Megatron-LM; dense and MoE architectures.</div>
+                    </li>
+                    <li>
+                        <div class="exp-header">
+                            <span class="exp-org">JP Morgan Chase &amp; Co</span>
+                            <span class="exp-period">Aug 2023 &ndash; Aug 2024</span>
+                        </div>
+                        <div class="exp-role">Quantitative Research Analyst, Asset &amp; Wealth Management</div>
+                        <div class="exp-details">Outlier-detection for risk sensitivities; product-risk rating framework.</div>
+                    </li>
+                    <li>
+                        <div class="exp-header">
+                            <span class="exp-org">WorldQuant LLC</span>
+                            <span class="exp-period">May 2022 &ndash; Jul 2022</span>
+                        </div>
+                        <div class="exp-role">Quantitative Research Intern, Mumbai</div>
+                        <div class="exp-details">Alpha weighting modules in C++; constrained optimization for production portfolios.</div>
+                    </li>
+                    <li>
+                        <div class="exp-header">
+                            <span class="exp-org">Dassault Aviation &mdash; IIT Madras</span>
+                            <span class="exp-period">Jan 2022 &ndash; May 2023</span>
+                        </div>
+                        <div class="exp-role">B.Tech Thesis</div>
+                        <div class="exp-details">PyTorch VAE with attention for flight telemetry augmentation; presented at RBCDSAI 2023.</div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Competitions & Red Teaming -->
+            <section id="other">
+                <h2>Competitions &amp; Red Teaming</h2>
+                <ul class="misc-list">
+                    <li><a href="https://www.kaggle.com/competitions/openai-gpt-oss-20b-red-teaming/hackathon-winners" target="_blank">OpenAI GPTOSS-20B Red Teaming Hackathon</a> &mdash; Honorable Mention (Top 20 / 611)</li>
+                    <li>OpenAI Bio Bug Bounty &mdash; Participant in biological risk red-teaming program</li>
+                    <li>Frontier Lab Red Teaming &mdash; Invited participant in an additional frontier model red-teaming program</li>
+                </ul>
+            </section>
+
         </main>
 
-
         <footer>
-            <p>© 2024 Mahesh Ramesh. Hosted on GitHub Pages.</p>
+            <p>&copy; 2026 Mahesh Ramesh</p>
         </footer>
 
     </div>

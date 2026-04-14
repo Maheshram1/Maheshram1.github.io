@@ -1,156 +1,434 @@
-/* style.css */
+/* style.css — academic personal site */
 
-/* Basic Reset & Body Styling */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #FFF5F5; /* Lavender Blush - Light Pink */
-    color: #444; /* Darker grey text for contrast */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+  background-color: #fff;
+  color: #333;
+  font-size: 15px;
 }
 
-/* Container to center content */
 .container {
-    max-width: 900px;
-    margin: 30px auto; /* Reduced top/bottom margin */
-    padding: 30px;
-    background-color: #ffffff; /* White background for content */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Softer shadow */
-    border-radius: 8px;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 40px 28px;
 }
 
-/* Header Styling */
-header {
-    text-align: center;
-    padding-bottom: 15px;
-    margin-bottom: 15px; /* Reduced margin */
-    /* Removed border for a cleaner look with nav */
-}
-
-header h1 {
-    margin-bottom: 5px;
-    color: #581845; /* Darker Purple/Pink for heading */
-    font-size: 2.2em;
-}
-
-header p.tagline {
-    color: #777; /* Medium grey for tagline */
-    font-size: 1.1em;
-    font-style: italic;
-    margin-bottom: 15px;
-}
-
-/* Header Social Links */
-.header-social-links {
-    list-style: none;
-    padding: 0;
-    margin: 15px 0 0 0; /* Space above icons */
-    text-align: center;
-}
-
-.header-social-links li {
-    display: inline-block;
-    margin: 0 12px;
-}
-
-.header-social-links a {
-    color: #555; /* Icon color */
-    font-size: 1.8em; /* Slightly smaller icons */
-    transition: color 0.3s ease;
-    text-decoration: none;
-}
-
-.header-social-links a:hover {
-    color: #DA70D6; /* Orchid - Pink hover color */
-}
-
-/* Navigation Styling (NEW) */
+/* ── Navigation ── */
 nav {
-    text-align: center;
-    margin-bottom: 30px; /* Space below nav */
-    padding-bottom: 15px; /* Space inside nav area */
-    border-bottom: 1px solid #eee; /* Light separator */
+  margin-bottom: 32px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav .site-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #111;
+  text-decoration: none;
+}
+
+nav .site-name:hover {
+  color: #111;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav li {
-    display: inline-block;
-    margin: 0 18px; /* Space between nav links */
+  list-style: none;
+  display: flex;
+  gap: 24px;
 }
 
 nav a {
-    text-decoration: none;
-    color: #C71585; /* Medium Violet Red for nav links */
-    font-weight: 500; /* Slightly bolder */
-    font-size: 1.1em;
-    transition: color 0.3s ease;
+  text-decoration: none;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s;
 }
 
 nav a:hover,
-nav a.active { /* Style for hover and active page */
-    color: #900C3F; /* Darker Magenta/Pink */
-    border-bottom: 2px solid #900C3F; /* Underline effect for active/hover */
-    padding-bottom: 3px;
+nav a.active {
+  color: #111;
 }
 
+/* ── Profile section (two-column) ── */
+.profile {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 36px;
+  align-items: flex-start;
+}
 
-/* Section Styling */
+.profile-photo {
+  flex-shrink: 0;
+}
+
+.profile-photo img {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+}
+
+.profile-photo .photo-placeholder {
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.profile-info h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.profile-info .affiliation {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+}
+
+.profile-info p {
+  color: #444;
+  margin-bottom: 10px;
+  font-size: 0.93rem;
+}
+
+.profile-links {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.profile-links a {
+  color: #555;
+  text-decoration: none;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.15s;
+}
+
+.profile-links a:hover {
+  color: #111;
+}
+
+.profile-links i {
+  font-size: 1rem;
+}
+
+/* ── Sections ── */
 section {
-    margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 h2 {
-    color: #581845; /* Darker Purple/Pink for section headers */
-    border-bottom: 2px solid #f0e6f2; /* Lighter pink/purple underline */
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #111;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
 }
 
-/* General Links Styling (within main content) */
 main a {
-    color: #C71585; /* Medium Violet Red */
-    text-decoration: none;
-    transition: color 0.3s ease;
+  color: #1a6dd4;
+  text-decoration: none;
+  transition: color 0.15s;
 }
 
 main a:hover {
-    text-decoration: underline;
-    color: #900C3F; /* Darker Magenta/Pink */
+  text-decoration: underline;
+  color: #104a91;
 }
 
-/* Blog/Papers List Styling (Example) */
-.post-list ul, .paper-list ul {
-    list-style: none;
-    padding-left: 0;
-}
-.post-list li, .paper-list li {
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 1px dotted #ddd; /* Dotted separator */
-}
-.post-list li:last-child, .paper-list li:last-child {
-    border-bottom: none; /* Remove border from last item */
-}
-.post-list .date, .paper-list .venue { /* Style for date or venue */
-    display: block;
-    font-size: 0.9em;
-    color: #888;
-    margin-top: 3px;
+/* ── News ── */
+.news-list {
+  list-style: none;
+  padding: 0;
 }
 
+.news-list li {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
 
-/* Footer Styling */
+.news-date {
+  color: #888;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+  min-width: 80px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Publications ── */
+.pub-list {
+  list-style: none;
+  padding: 0;
+}
+
+.pub-list li {
+  margin-bottom: 22px;
+  padding-left: 0;
+}
+
+.pub-title {
+  font-weight: 600;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.pub-authors {
+  font-size: 0.88rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+.pub-authors strong {
+  color: #111;
+  font-weight: 600;
+}
+
+.pub-venue {
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 3px;
+}
+
+.pub-links {
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+.pub-links a {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.pub-desc {
+  font-size: 0.88rem;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* ── Experience (compact) ── */
+.exp-list {
+  list-style: none;
+  padding: 0;
+}
+
+.exp-list li {
+  margin-bottom: 14px;
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.exp-header .exp-org {
+  font-weight: 600;
+  color: #111;
+  font-size: 0.93rem;
+}
+
+.exp-header .exp-period {
+  font-size: 0.82rem;
+  color: #888;
+}
+
+.exp-role {
+  font-size: 0.88rem;
+  color: #555;
+  font-style: italic;
+}
+
+.exp-details {
+  font-size: 0.88rem;
+  color: #555;
+  margin-top: 2px;
+}
+
+/* ── Misc list ── */
+.misc-list {
+  list-style: none;
+  padding: 0;
+}
+
+.misc-list li {
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  padding-left: 14px;
+  position: relative;
+}
+
+.misc-list li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: #999;
+}
+
+/* ── Education ── */
+.edu-list {
+  list-style: none;
+  padding: 0;
+}
+
+.edu-list li {
+  margin-bottom: 10px;
+}
+
+.edu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.edu-header .edu-school {
+  font-weight: 600;
+  color: #111;
+  font-size: 0.93rem;
+}
+
+.edu-header .edu-period {
+  font-size: 0.82rem;
+  color: #888;
+}
+
+.edu-degree {
+  font-size: 0.88rem;
+  color: #555;
+}
+
+/* ── Blog ── */
+article.blog-post {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #eee;
+}
+
+article.blog-post h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 16px;
+}
+
+article.blog-post h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+article.blog-post p {
+  margin-bottom: 12px;
+  color: #444;
+  font-size: 0.93rem;
+}
+
+article.blog-post ol,
+article.blog-post ul {
+  margin-left: 22px;
+  margin-bottom: 12px;
+}
+
+article.blog-post li {
+  margin-bottom: 5px;
+  font-size: 0.93rem;
+  color: #444;
+}
+
+code {
+  background-color: #f5f5f5;
+  padding: 0.15em 0.4em;
+  font-size: 0.86em;
+  border-radius: 3px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  color: #d14;
+}
+
+/* ── Footer ── */
 footer {
+  text-align: center;
+  margin-top: 50px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e5e5;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .container {
+    padding: 20px 16px;
+  }
+  .profile {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-    font-size: 0.9em;
-    color: #888; /* Lighter grey */
+  }
+  .profile-info .affiliation {
+    text-align: center;
+  }
+  .profile-links {
+    justify-content: center;
+  }
+  .profile-photo img,
+  .profile-photo .photo-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+  nav {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .exp-header, .edu-header {
+    flex-direction: column;
+    gap: 0;
+  }
+  .news-list li {
+    flex-direction: column;
+    gap: 1px;
+  }
+  .news-date {
+    min-width: auto;
+  }
 }
