@@ -79,6 +79,7 @@ nav a.active {
   height: 180px;
   border-radius: 10px;
   object-fit: cover;
+  object-position: center 20%;
   display: block;
 }
 
