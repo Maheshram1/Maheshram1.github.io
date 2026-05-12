@@ -72,20 +72,26 @@ nav a.active {
 
 .profile-photo {
   flex-shrink: 0;
-}
-
-.profile-photo img {
   width: 180px;
   height: 180px;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  /* Lower focal point: crop more from top; slight zoom clips edges */
+  object-position: center 46%;
+  transform: scale(1.12);
+  transform-origin: center 38%;
   display: block;
 }
 
 .profile-photo .photo-placeholder {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px;
   background: #f0f0f0;
   display: flex;
@@ -457,10 +463,14 @@ footer {
   .profile-links {
     justify-content: center;
   }
-  .profile-photo img,
-  .profile-photo .photo-placeholder {
+  .profile-photo {
     width: 150px;
     height: 150px;
+  }
+  .profile-photo img,
+  .profile-photo .photo-placeholder {
+    width: 100%;
+    height: 100%;
   }
   nav {
     flex-direction: column;
