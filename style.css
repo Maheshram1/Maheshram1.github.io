@@ -82,10 +82,7 @@ nav a.active {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Lower focal point: crop more from top; slight zoom clips edges */
-  object-position: center 46%;
-  transform: scale(1.12);
-  transform-origin: center 38%;
+  object-position: center center;
   display: block;
 }
 
