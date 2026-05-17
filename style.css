@@ -350,6 +350,7 @@ main a:hover {
 }
 
 /* ── Blog ── */
+.blog-coming-soon,
 .blog-category-note {
   color: #888;
   font-size: 0.9rem;
