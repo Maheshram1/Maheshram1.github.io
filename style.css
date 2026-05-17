@@ -350,6 +350,22 @@ main a:hover {
 }
 
 /* ── Blog ── */
+.blog-category-note {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.blog-category {
+  margin-top: 40px;
+}
+
+.blog-category .blog-post:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 .blog-toc {
   background: #f9f9f9;
   border: 1px solid #eee;
