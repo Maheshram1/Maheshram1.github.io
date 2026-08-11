@@ -118,15 +118,6 @@ nav a.active {
   font-size: 0.93rem;
 }
 
-.hiring-banner {
-  background: #fff8e1;
-  border-left: 3px solid #f9a825;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
 .profile-links {
   list-style: none;
   display: flex;
