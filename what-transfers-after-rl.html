@@ -31,16 +31,18 @@
                 <p>My intuition: I believe this happens because we never calculate loss on the knowledge tokens since they are part of the prompt. A future direction could be to add the context to the loss calculation, but then we would move away from the online setting.</p>
 
                 <div class="result-block">
-                    <div class="result-title">RL gain with task knowledge provided versus omitted</div>
+                    <div class="result-title">Qwen3-4B-Instruct results across scaffolds</div>
                     <table class="result-table">
-                        <thead><tr><th>Model</th><th>Hanabi trained scaffold</th><th>Hanabi knowledge omitted</th><th>KPE trained scaffold</th><th>KPE knowledge omitted</th></tr></thead>
+                        <thead><tr><th>Checkpoint</th><th>Watson</th><th>Sherlock</th><th>Mycroft</th></tr></thead>
                         <tbody>
-                            <tr><th scope="row">4B</th><td>+3.67</td><td>+2.46</td><td>+17.0</td><td>+1.1</td></tr>
-                            <tr><th scope="row">8B</th><td>+4.17</td><td>+1.79</td><td>+21.0</td><td>+1.2</td></tr>
-                            <tr><th scope="row">32B</th><td>+2.71</td><td>+1.88</td><td>+8.5</td><td>+2.2</td></tr>
+                            <tr><th scope="row">Base</th><td>1.38</td><td>2.96</td><td>0.88</td></tr>
+                            <tr><th scope="row">Qwen-ST</th><td>2.12</td><td>7.25</td><td>2.84</td></tr>
+                            <tr><th scope="row">Qwen-Hanabi</th><td>2.21</td><td>13.29</td><td>12.83</td></tr>
+                            <tr><th scope="row">Qwen-Hanabi+</th><td>2.46</td><td>11.00</td><td>13.38</td></tr>
+                            <tr><th scope="row">Final RL gain</th><td>+0.25</td><td>-2.29</td><td>+0.55</td></tr>
                         </tbody>
                     </table>
-                    <p class="result-caption">RL gain under the trained scaffold and under a scaffold that omits task knowledge.</p>
+                    <p class="result-caption">Hanabi score across the Qwen3-4B-Instruct training trajectory. Watson, Sherlock, and Mycroft are the three scaffolds.</p>
                 </div>
 
                 <h4>2. Do models perform better on the exact scaffold they were trained on?</h4>
