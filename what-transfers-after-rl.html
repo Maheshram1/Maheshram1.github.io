@@ -30,83 +30,22 @@
                 <p>Results: Model performance improves when the knowledge is provided, but when it is not provided, performance does not improve much. We also evaluated the models’ knowledge using QA pairs, and we did not see any improvement. We call this "Spiky-training" where the model seems to have learned the task but once the knowledge is removed the performance is back to base model level. This could be quite deceiving. This is in line with previous results: RL is not the right way to inject knowledge. It follows the common consensus that SFT or OPD is needed to shape the prior before doing RL, and it goes against post-training from scratch.</p>
                 <p>My intuition: I believe this happens because we never calculate loss on the knowledge tokens since they are part of the prompt. A future direction could be to add the context to the loss calculation, but then we would move away from the online setting.</p>
 
-                <div class="result-block">
-                    <div class="result-title">Qwen3-4B-Instruct results across scaffolds</div>
-                    <table class="result-table">
-                        <thead><tr><th>Checkpoint</th><th>Watson</th><th>Sherlock</th><th>Mycroft</th></tr></thead>
-                        <tbody>
-                            <tr><th scope="row">Base</th><td>1.38</td><td>2.96</td><td>0.88</td></tr>
-                            <tr><th scope="row">Qwen-ST</th><td>2.12</td><td>7.25</td><td>2.84</td></tr>
-                            <tr><th scope="row">Qwen-Hanabi</th><td>2.21</td><td>13.29</td><td>12.83</td></tr>
-                            <tr><th scope="row">Qwen-Hanabi+</th><td>2.46</td><td>11.00</td><td>13.38</td></tr>
-                            <tr><th scope="row">Final RL gain</th><td>+0.25</td><td>-2.29</td><td>+0.55</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="result-caption">Hanabi score across the Qwen3-4B-Instruct training trajectory. Watson, Sherlock, and Mycroft are the three scaffolds.</p>
-                </div>
-
                 <h4>2. Do models perform better on the exact scaffold they were trained on?</h4>
                 <p>We trained models on three different scaffolds for Hanabi and two different scaffolds for KPE. We see a common pattern: the model performs better on the exact scaffold it was trained on than on other scaffolds, even when we provide semantically equivalent details.</p>
                 <p>After post-training, models tend to have some affinity to the prompts, scaffold, and formatting. We have seen this pattern before in the deception manipulation paper, where the model was able to target vulnerable users because the conditional generation prompts were similar to the training prompts. We have also seen it in backdoors such as sleeper agents, and in the recent Hacker-Opus incident, where the model became misaligned when the query was similar to the buggy environments.</p>
                 <p>We also see models catching patterns and some form of chunky post-training when the scaffolds are changed. I see this as a form of failed generalization. The model learned the scaffold it was trained on quite well, but the transfer was not great.</p>
                 <p>Models with higher base competence seem to be better in this aspect, but more work is required here to understand it well.</p>
 
-                <div class="result-block">
-                    <div class="result-title">Transfer depends on base competence</div>
-                    <table class="result-table result-table-small">
-                        <thead><tr><th>Model</th><th>Base Hanabi score</th><th>Trained scaffold gain</th><th>Held-out scaffold gain</th></tr></thead>
-                        <tbody>
-                            <tr><th scope="row">Qwen3-4B-Instruct</th><td>&lt; 2</td><td>+10.33</td><td>+0.84</td></tr>
-                            <tr><th scope="row">GPT-OSS-120B</th><td>&gt; 12.5</td><td>+11.95</td><td>+1.96</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="result-caption">Hanabi RL gains for models with low and high base competence.</p>
-                </div>
-
                 <h4>3. What really makes a model better after post-training, such as solving Navier-Stokes equations?</h4>
                 <p>So what do we actually get from post-training? One is that post-training improves test-time compute. It makes the model think more, and we have all seen performance improve when we increase the reasoning effort. We see the same thing after RL. The model’s behavior changes. It starts to deliberate more and improves on tasks where it already has some knowledge, as well as on tasks where we provide the relevant knowledge in-context. This is very relevant for real-life use cases: even if the model doesn't have knowledge, it can use the internet to gain it.</p>
                 <p>The improvement in inference-time compute depends on the environment used for training. Training on easier tasks hurts the inference-time behavior we want. We need to train on harder tasks instead. Prior work has also shown the importance of curriculum learning.</p>
-
-                <div class="result-block result-callout">
-                    <div class="result-title">More inference-time compute</div>
-                    <div class="metric-row"><span>Pass@8 before RL</span><strong>0.15</strong></div>
-                    <div class="metric-track"><span style="width: 41%;"></span></div>
-                    <div class="metric-row"><span>Pass@8 after hard-task RL</span><strong>0.37</strong></div>
-                    <div class="metric-track"><span style="width: 100%;"></span></div>
-                    <p class="result-caption">Pass@8 on the non-Hanabi reasoning evaluation.</p>
-                </div>
 
                 <h4>4) Finally, what other benefits can we get from RL?</h4>
                 <p>We have seen so far that RL helps when the knowledge is provided, but not when it is missing. Is that all? We see that RL-trained models also act as better initializations for subsequent training. A model trained on a difficult state-tracking task acts as a better initialization for training on both Hanabi and KPE.</p>
                 <p>Even though the model’s Pass@1 is the same as the base model’s, its Pass@K is better, which makes convergence faster. My intuition is that the increased inference-time compute helps the model explore more. Each rollout explores more compared to the base model, improving Pass@K, which in turn helps with subsequent RL training.</p>
 
-                <div class="result-block">
-                    <div class="result-title">Hard-task RL gives a better initialization</div>
-                    <table class="result-table result-table-small">
-                        <thead><tr><th>Initialization</th><th>Steps to reach the same state-tracking reward</th></tr></thead>
-                        <tbody>
-                            <tr><th scope="row">Base model</th><td>about 133</td></tr>
-                            <tr><th scope="row">Hard-task RL checkpoint</th><td>about 59</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="result-caption">Downstream RL on Hanabi, as shown in the paper’s training curve.</p>
-                </div>
-
                 <h4>Interesting bits:</h4>
                 <p>1) We see the importance of scale when measuring models’ knowledge. We know that all Qwen models are pretrained on the same data and training pipeline. Our observation that the 32B model stores more knowledge in both Hanabi and KPE shows how scaling models helps with storing knowledge, which I find interesting. Again, this is well known, but seeing it empirically is a good experience.</p>
-
-                <div class="result-block">
-                    <div class="result-title">Knowledge increases with model scale</div>
-                    <table class="result-table result-table-small">
-                        <thead><tr><th>Model</th><th>Hanabi rule recall</th><th>KPE No-card solve rate</th></tr></thead>
-                        <tbody>
-                            <tr><th scope="row">4B</th><td>49%</td><td>7.0%</td></tr>
-                            <tr><th scope="row">8B</th><td>61%</td><td>9.7%</td></tr>
-                            <tr><th scope="row">32B</th><td>82.5%</td><td>22.7%</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="result-caption">Pretrained knowledge probes before RL.</p>
-                </div>
             </article>
         </main>
 
