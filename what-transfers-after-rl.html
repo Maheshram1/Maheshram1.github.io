@@ -37,7 +37,6 @@
                 <p>Models with higher base competence seem to be better in this aspect, but more work is required here to understand it well.</p>
 
                 <h4>3. What really makes a model better after post-training, such as solving Navier-Stokes equations?</h4>
-                <p>So far, we have mostly talked about how RL fails to transfer knowledge or generalize across scaffolds. But we all know that RL is still driving many of the recent improvements in model capabilities. People would not be spending so much on post-training if it was not working. That part is common sense.</p>
                 <p>So what do we actually get from post-training? One is that post-training improves test-time compute. It makes the model think more, and we have all seen performance improve when we increase the reasoning effort. We see the same thing after RL. The model’s behavior changes. It starts to deliberate more and improves on tasks where it already has some knowledge, as well as on tasks where we provide the relevant knowledge in-context. This is very relevant for real-life use cases: even if the model doesn't have knowledge, it can use the internet to gain it.</p>
                 <p>The improvement in inference-time compute depends on the environment used for training. Training on easier tasks hurts the inference-time behavior we want. We need to train on harder tasks instead. Prior work has also shown the importance of curriculum learning.</p>
 
