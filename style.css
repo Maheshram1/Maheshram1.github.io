@@ -433,6 +433,26 @@ article.blog-post li {
   color: #444;
 }
 
+article.blog-post figure {
+  margin: 20px 0 26px;
+}
+
+article.blog-post figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+article.blog-post figcaption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #777;
+}
+
 code {
   background-color: #f5f5f5;
   padding: 0.15em 0.4em;
